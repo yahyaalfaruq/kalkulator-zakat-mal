@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Zakat Mal</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 500px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #337ab7;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+
+      #zakatForm {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      input[type="number"],
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+      }
+
+      input[readonly] {
+        background-color: #e9ecef;
+        color: #495057;
+      }
+
+      button[type="submit"] {
+        background-color: #337ab7;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #08508e;
+      }
+
+      .result {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Kalkulator Zakat Mal</h1>
+      <form id="zakatForm">
+        <label for="totalAssets">Total Aset (Rp):</label>
+        <input type="text" inputmode="numeric" id="totalAssets" required />
+        <label for="nisab">Nisab (Rp):</label>
+        <input type="text" inputmode="numeric" id="nisab" required />
+        <button type="submit">Hitung Zakat</button>
+        <div class="result" id="result"></div>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("zakatForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const totalAssets = parseFloat(
+            document.getElementById("totalAssets").value
+          );
+          const nisab = parseFloat(document.getElementById("nisab").value);
+
+          if (totalAssets >= nisab) {
+            const zakat = (totalAssets * 2.5) / 100;
+            document.getElementById(
+              "result"
+            ).innerText = `Zakat yang harus dibayar: Rp ${zakat}`;
+          } else {
+            document.getElementById("result").innerText =
+              "Total aset Anda belum mencapai nisab, Anda tidak wajib membayar zakat.";
+          }
+        });
+    </script>
+  </body>
+</html>
